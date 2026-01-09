@@ -1,0 +1,259 @@
+<!-- 解决这个问题的一种方法是在本地启动一个Web服务器，并通过该服务器来服务你的HTML和模型文件。
+  Python提供了一个非常方便的HTTP服务器，你可以在你的项目目录
+  （看起来应该是"C:\Users\kazdel\Documents\延世大线下课程资料总集\2023上\IoT와로보틱스 (YCS1008.01-00)\项目相关\html project_V0.6"）中启动它。这样做的步骤如下：
+
+1.打开一个命令提示符窗口。
+2.切换到你的项目目录。例如，你可以输入
+  cd "C:\Users\kazdel\Documents\延世大线下课程资料总集\2023上\IoT와로보틱스 (YCS1008.01-00)\项目相关\html project_V1.0"
+  并按Enter键。
+3.输入
+  python -m http.server
+  并按Enter键。这将启动一个在8000端口运行的HTTP服务器。
+4.在你的Web浏览器中，访问
+http://localhost:8000/html/우리 친해요 프로젝트 사이트.html
+这样，你的HTML文件和模型文件都将通过HTTP服务器服务，而不是直接从本地文件系统加载，这应该能解决你遇到的问题。
+
+请注意，这需要你的系统中已经安装了Python，并且python命令被添加到了系统路径中。如果你的系统中没有Python，你可能需要首先安装它。 -->
+
+<!DOCTYPE html><!--Ctrl+/,快速注释一段代码-->
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><!--相机部分-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>우리 친해요 프로젝트 사이트</title>
+
+    <link rel="stylesheet" href="../Css/Kp.css">
+    <link rel="stylesheet" href="../Css/iconfont.css">
+
+    <style>  
+      body {
+        margin: 0;
+      }
+
+      #webcam-container {/* 相机格式：按行排列 */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;  /* 这个新的属性会使内容在超出容器宽度时自动换行 */
+      }
+
+      .session {/* 间隔 */
+        margin-right: 20px;
+      }
+
+    </style>
+  </head>
+
+  <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>相机部分-->
+  <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>导入TensorFlow.js库-->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script> -->
+
+  <!-- 先导入@tensorflow，再导入@teachablemachine -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+
+
+
+  <body>
+    <div style="
+      background-color: #f1f1f1;
+      text-align: center;
+      padding:1px
+      
+    ">
+    <h1>우리 친해요</h1>
+    </div>
+
+
+
+ <div style="background-color: #7dc5e4;
+             text-align: center;
+             padding:5px">
+  <h3>다음 세 가지 동작 중 하나를 선택해 주세요~</h3>
+</div>
+
+
+ <div class="botton">
+   <div class="botton1">
+    <div class="kp"><!--保持图片完整缩放-->
+       <img 
+       style="width:100%;height:auto"
+       src="..\img\six_image_show\KakaoTalk_20230616_164103779_03.jpg" 
+       >
+       <a href="../html/back.py" class="kpa"><span>play:요정샷</span></a>
+       <div class="kp1">
+           <div class="kpas"><a href="../html/1.html"><i class="iconfont">&#xe609;</i></a></div>
+       </div>
+    </div>
+   <div class="kp">
+       <img 
+       style="width:100%;height:auto"
+       src="..\img\six_image_show\KakaoTalk_20230616_164103779_04.jpg">
+       <a href="../html/heart.html" class="kpa"><span>healing:투명쉼터</span></a>
+       <div class="kp1">
+           <div class="kpas"><a href="../html/heart.html"><i class="iconfont">&#xe609;</i></a></div>
+       </div>
+   </div>
+   <div class="kp">
+       <img 
+       style="width:100%;height:auto"
+       src="..\img\six_image_show\KakaoTalk_20230616_164103779_05.jpg">
+       <a href="../html/hold.html" class="kpa"><span>love:사랑해요</span></a>
+       <div class="kp1">
+           <div class="kpas"><a href="../html/hold.html"><i class="iconfont">&#xe609;</i></a></div>
+       </div>
+    </div>
+
+    <div class="kp"><!--保持图片完整缩放-->
+      <img 
+      style="width:100%;height:auto"
+      src="..\img\six_image_show\KakaoTalk_20230616_164103779.jpg" 
+      >
+      <a href="../html/back.py" class="kpa"><span>play:짱구와맹구</span></a>
+      <div class="kp1">
+          <div class="kpas"><a href="../html/heart.html"><i class="iconfont">&#xe609;</i></a></div>
+      </div>
+   </div>
+  <div class="kp">
+      <img 
+      style="width:100%;height:auto"
+      src="..\img\six_image_show\KakaoTalk_20230616_164103779_01.jpg">
+      <a href="../html/heart.html" class="kpa"><span>healing:야호</span></a>
+      <div class="kp1">
+          <div class="kpas"><a href="../html/heart.html"><i class="iconfont">&#xe609;</i></a></div>
+      </div>
+  </div>
+  <div class="kp">
+      <img 
+      style="width:100%;height:auto"
+      src="..\img\six_image_show\KakaoTalk_20230616_164103779_02.jpg">
+      <a href="../html/hold.html" class="kpa"><span>love:손깍지</span></a>
+      <div class="kp1">
+          <div class="kpas"><a href="../html/hold.html"><i class="iconfont">&#xe609;</i></a></div>
+      </div>
+   </div>
+
+   </div>
+ </div>
+
+
+
+
+
+ <div class="botton2" style="display: flex; justify-content: center; width: 100%;">
+
+  <div style="padding:50px; text-align: center;">
+<div>Teachable Machine Image Model | countdown = <span id="countdown">10</span></div>
+<button type="button" onclick="init()">Start</button>
+<div id="webcam-container"></div>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+<script type="text/javascript">
+  const URL = "../model/final/";
+  let model, webcam, maxPredictions;
+  var sessionCount = 0;
+
+  async function init() {
+  const modelURL = "../model/final/model.json";
+  const metadataURL = "../model/final/metadata.json";
+
+  model = await tmImage.load(modelURL, metadataURL);
+  maxPredictions = model.getTotalClasses();
+
+  const flip = true;
+  webcam = new tmImage.Webcam(500, 500, flip);
+  await webcam.setup();
+  await webcam.play();
+
+  window.requestAnimationFrame(loop);
+
+  // Create a new session div for each session
+  var sessionDiv = document.createElement("div");
+  sessionDiv.classList.add("session");
+
+  var webcamContainer = document.createElement("div");
+  webcamContainer.appendChild(webcam.canvas);
+  sessionDiv.appendChild(webcamContainer);
+
+  var labelContainer = document.createElement("div");
+  for (let i = 0; i < maxPredictions; i++) {
+    labelContainer.appendChild(document.createElement("div"));
+  }
+  sessionDiv.appendChild(labelContainer);
+
+  document.getElementById("webcam-container").appendChild(sessionDiv);
+
+  sessionCount += 1;
+
+  var countdownElement = document.getElementById("countdown");
+  var countdownValue = 10;
+  countdownElement.innerText = countdownValue;
+  var countdownInterval = setInterval(function() {
+      countdownValue -= 1;
+      countdownElement.innerText = countdownValue;
+      if (countdownValue <= 0) {
+          webcam.stop();
+          clearInterval(countdownInterval);
+
+          // If this is the third session, show the text.
+        if (sessionCount === 3) {
+            var textContainer = document.getElementById("text-container");
+            textContainer.style.display = "block";  // Show the div
+            //textContainer.innerHTML = `플레이<br>`;// Set the text
+            textContainer.classList.add("show");  // Add the CSS class，实现渐变
+        }
+
+      }
+  }, 1000);
+}
+
+    async function loop() {
+        webcam.update(); // update the webcam frame
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
+
+    async function predict() {
+    const prediction = await model.predict(webcam.canvas);
+    for (let i = 0; i < maxPredictions; i++) {
+        const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+        
+        // Get the div for this class's prediction
+        let classDiv = document.getElementById("webcam-container").children[sessionCount - 1].children[1].children[i];
+        
+        // Update the div with the class prediction
+        classDiv.innerHTML = classPrediction;
+        
+        // Add the CSS class for the prediction text
+        classDiv.classList.add("predicted-class");
+    }
+}
+
+</script>
+</div> 
+</div>
+
+<!-- 得分计算文本/图片 -->
+<div id="text-container" style="background-color: #b5e2e8; text-align: center; padding:0px;">
+  <img src="..\img\KakaoTalk_20230616_201452167.jpg" alt="得分标准" style="width:100%;">
+</div>
+
+
+
+<div style="clear:both;"></div>
+
+    <footer style="
+      background-color: #f1f1f1;
+      text-align: center;
+      padding:5px
+    ">
+    <p>HU ZONGXIN  2021142168 | 김민영 2016142114 | 김은수 2022190161 | 박서연 2022123268 | 백미경 2022123114</p>
+    </footer>
+  </body>
+</html>
